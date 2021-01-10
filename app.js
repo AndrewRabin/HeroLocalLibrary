@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -14,8 +15,9 @@ var app = express();
 
 /////////////// DB /////////////////////////////////////////
 
-var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://dbAdmin:dbAdmin@cluster0.e1tui.mongodb.net/dbLib?retryWrites=true&w=majority';
+var dev_db_url = 'mongodb+srv://dbAdmin:dbAdmin@cluster0.e1tui.mongodb.net/dbLib?retryWrites=true&w=majority';
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
+
 //var client = new MongoClient(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(mongoDB, { useNewUrlParser: true,
                             useUnifiedTopology: true,
