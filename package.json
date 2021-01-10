@@ -2,8 +2,7 @@
   "name": "locallibrary",
   "version": "0.0.0",
   "engines":{
-    "node": "14.15.1",
-    "vode": "0.0.0"
+    "node": "14.15.1"
   },
   "private": true,
   "scripts": {
