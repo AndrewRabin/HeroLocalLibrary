@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="myCarousel.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <table class="carousel_table">
+            <tbody>
+                <tr>
+                    <td class="carousel_td">
+                        <img id="viewport" src="smiles/01_large.png" />
+                        <br />
+                        <div id="idPos">0</div>
+                        <div id="carousel" class="carousel">
+                            <button class="arrow prev">⇦</button>
+                            <div class="gallery">
+                                <ul class="images">
+                                    <li>
+                                        <a href="smiles/01_large.png" title="01"><img src="smiles/01.png" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="smiles/02_large.png" title="02"><img src="smiles/02.png" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="smiles/03_large.png" title="03"><img src="smiles/03.png" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="smiles/04_large.png" title="04"><img src="smiles/04.png" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="smiles/05_large.png" title="05"><img src="smiles/05.png" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="smiles/06_large.png" title="06"><img src="smiles/06.png" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="smiles/07_large.png" title="07"><img src="smiles/07.png" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="smiles/08_large.png" title="08"><img src="smiles/08.png" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="smiles/09_large.png" title="09"><img src="smiles/09.png" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="smiles/10_large.png" title="10"><img src="smiles/10.png" /></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button class="arrow next">⇨</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            class CarouselHandler {
+                constructor() {
+                    this.elemWidth = 130;
+                    this.position = 0;
+                    this.list = carousel.querySelector('ul');
+                    this.numOfElems = carousel.querySelectorAll('li').length;
+                }
+
+                handleEvent(event) {
+                    let method = 'on' + event.type[0].toUpperCase() + event.type.slice(1);
+                    this[method](event);
+                }
+
+                onClick(event) {
+                    switch (event.target.className) {
+                        case 'arrow prev': {
+                            this.move(-1);
+                            break;
+                        }
+                        case 'arrow next': {
+                            this.move(1);
+                            break;
+                        }
+                        default: {
+                            let target = event.target.closest('a');
+                            if (!target) return;
+                            viewport.src = target.href;
+                            event.preventDefault();
+                        }
+                    }
+                }
+
+                onMousedown(event) {
+                    switch (event.target.className) {
+                        case 'arrow prev':
+                        case 'arrow next': {
+                            event.target.style.color = 'black';
+                            break;
+                        }
+                    }
+                }
+                onMouseup(event) {
+                    switch (event.target.className) {
+                        case 'arrow prev':
+                        case 'arrow next': {
+                            event.target.style.color = 'gray';
+                            break;
+                        }
+                    }
+                }
+
+                onWheel(event) {
+                    if (event.deltaY < 0) this.move(1);
+                    else this.move(-1);
+                }
+
+                onContextmenu(event) {
+                    event.preventDefault();
+                }
+
+                move(direction) {
+                    this.position += this.elemWidth * direction;
+                    this.position = this.position > 0 ? 0 : this.position;
+                    let z = (this.numOfElems * this.elemWidth - 3 * this.elemWidth) * -1;
+                    this.position = this.position < z ? z : this.position;
+
+                    this.list.style.marginLeft = this.position + 'px';
+
+                    idPos.textContent = this.position;
+                }
+            }
+
+            let carouselHandler = new CarouselHandler();
+            carousel.addEventListener('mouseup', carouselHandler);
+            carousel.addEventListener('mousedown', carouselHandler);
+            carousel.addEventListener('click', carouselHandler);
+            carousel.addEventListener('wheel', carouselHandler);
+            carousel.addEventListener('contextmenu', carouselHandler);
+        </script>
+    </body>
+</html>

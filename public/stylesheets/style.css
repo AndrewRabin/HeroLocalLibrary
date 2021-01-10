@@ -1,0 +1,23 @@
+body {
+    padding: 50px;
+    font: 14px 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: blanchedalmond;
+}
+
+a {
+    color: #216e8d;
+}
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 20px;
+    list-style: none;
+}
+.col-sm-2 {
+    background-color: cornsilk;
+}
+
+.formTest {
+    padding: 20px;
+    color: brown;
+    font: 18px 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1 #{id}
+
+    h4 Do you really want to delete this copy?
+
+    form(method='POST' action='')
+        div.form-group
+        input(type='hidden', name='bookinstanceid', required='true', value=id )
+        button.btn.btn-primary(type='submit') Delete
+
